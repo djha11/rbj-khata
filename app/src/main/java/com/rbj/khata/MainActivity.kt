@@ -43,6 +43,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rbj.khata.ui.theme.RBJKhataTheme
 import com.rbj.khata.ui.customers.CustomerListScreen
+import androidx.compose.runtime.mutableStateOf
+import com.rbj.khata.ui.customers.AddCustomerScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.rbj.khata.data.CustomerRepository
+import com.rbj.khata.data.local.DatabaseProvider
+import com.rbj.khata.ui.customers.CustomerViewModel
+import com.rbj.khata.ui.customers.CustomerViewModelFactory
 private val RBJGreen = Color(0xFF1B5E20)
 private val RBJGreenLight = Color(0xFFE8F5E9)
 private val RBJGold = Color(0xFFC49A3A)
@@ -70,7 +77,19 @@ class MainActivity : ComponentActivity() {
 fun RBJKhataApp() {
 
     var selectedTab by remember { mutableIntStateOf(0) }
+    var showAddCustomer by remember { mutableStateOf(false) }
 
+    val database = DatabaseProvider.getDatabase(
+        context = androidx.compose.ui.platform.LocalContext.current
+    )
+
+    val repository = remember {
+        CustomerRepository(database.customerDao())
+    }
+
+    val customerViewModel: CustomerViewModel = viewModel(
+        factory = CustomerViewModelFactory(repository)
+    )
     Scaffold(
         containerColor = RBJBackground,
 
@@ -118,8 +137,9 @@ fun RBJKhataApp() {
 
                 NavigationBarItem(
                     selected = selectedTab == 0,
-                    onClick = { selectedTab = 0 },
-                    icon = {
+                    onClick = {
+                        showAddCustomer = true
+                    },                    icon = {
                         Text("⌂", fontSize = 22.sp)
                     },
                     label = {
@@ -168,8 +188,25 @@ fun RBJKhataApp() {
                 modifier = Modifier.padding(innerPadding)
             )
 
-            1 -> CustomerListScreen()
-
+            1 -> {
+                if (showAddCustomer) {
+                    AddCustomerScreen(
+                        onSave = { name, mobile, village ->
+                            customerViewModel.addCustomer(
+                                name = name,
+                                mobile = mobile,
+                                village = village
+                            )
+                            showAddCustomer = false
+                        },
+                        onBack = {
+                            showAddCustomer = false
+                        }
+                    )
+                } else {
+                    CustomerListScreen()
+                }
+            }
             2 -> {
                 Text(
                     text = "Alerts",
