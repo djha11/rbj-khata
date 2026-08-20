@@ -1,4 +1,4 @@
-package com.rbj.khata.ui.customers
+﻿package com.rbj.khata.ui.customers
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AddCustomerScreen(
+    modifier: Modifier = Modifier,
     onSave: (
         name: String,
         mobile: String,
@@ -26,7 +27,6 @@ fun AddCustomerScreen(
     ) -> Unit,
     onBack: () -> Unit
 ) {
-
     var name by rememberSaveable {
         mutableStateOf("")
     }
@@ -40,7 +40,7 @@ fun AddCustomerScreen(
     }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -54,7 +54,9 @@ fun AddCustomerScreen(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Customer Name") },
+            label = {
+                Text("Customer Name")
+            },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -62,7 +64,9 @@ fun AddCustomerScreen(
         OutlinedTextField(
             value = mobile,
             onValueChange = { mobile = it },
-            label = { Text("Mobile Number") },
+            label = {
+                Text("Mobile Number")
+            },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -70,14 +74,20 @@ fun AddCustomerScreen(
         OutlinedTextField(
             value = village,
             onValueChange = { village = it },
-            label = { Text("Village") },
+            label = {
+                Text("Village")
+            },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
 
         Button(
             onClick = {
-                onSave(name, mobile, village)
+                onSave(
+                    name,
+                    mobile,
+                    village
+                )
             },
             modifier = Modifier.fillMaxWidth(),
             enabled = name.isNotBlank() &&

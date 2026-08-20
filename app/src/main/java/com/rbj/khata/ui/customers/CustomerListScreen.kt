@@ -1,4 +1,4 @@
-package com.rbj.khata.ui.customers
+﻿package com.rbj.khata.ui.customers
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,46 +11,24 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rbj.khata.data.Customer
+import com.rbj.khata.data.local.CustomerEntity
 
 @Composable
-fun CustomerListScreen() {
-
-    val customers = listOf(
-        Customer(
-            id = "C001",
-            name = "Ram Bihar Jha",
-            mobile = "98XXXXXXXX",
-            village = "Rampur",
-            totalDue = 3000.0,
-            interestDue = 300.0
-        ),
-        Customer(
-            id = "C002",
-            name = "Suresh Kumar",
-            mobile = "97XXXXXXXX",
-            village = "Madhubani",
-            totalDue = 5000.0,
-            interestDue = 500.0
-        ),
-        Customer(
-            id = "C003",
-            name = "Rajesh Jha",
-            mobile = "96XXXXXXXX",
-            village = "Darbhanga",
-            totalDue = 2500.0,
-            interestDue = 250.0
-        )
-    )
+fun CustomerListScreen(
+    viewModel: CustomerViewModel,
+    modifier: Modifier = Modifier
+) {
+    val customers by viewModel.customers.collectAsState()
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-
         Text(
             text = "Customers",
             style = MaterialTheme.typography.headlineMedium
@@ -59,15 +37,19 @@ fun CustomerListScreen() {
         Text(
             text = "${customers.size} customers",
             style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
+            modifier = Modifier.padding(
+                top = 4.dp,
+                bottom = 16.dp
+            )
         )
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-
-            items(customers) { customer ->
-
+            items(
+                items = customers,
+                key = { customer -> customer.id }
+            ) { customer ->
                 CustomerCard(customer = customer)
             }
         }
@@ -75,16 +57,15 @@ fun CustomerListScreen() {
 }
 
 @Composable
-private fun CustomerCard(customer: Customer) {
-
+private fun CustomerCard(
+    customer: CustomerEntity
+) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-
             Text(
                 text = customer.name,
                 style = MaterialTheme.typography.titleMedium

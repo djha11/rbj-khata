@@ -1,4 +1,4 @@
-package com.rbj.khata
+﻿package com.rbj.khata
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -104,7 +104,7 @@ fun RBJKhataApp() {
                 },
                 actions = {
                     Text(
-                        text = "🔔",
+                        text = "\uD83D\uDD14”",
                         fontSize = 22.sp,
                         modifier = Modifier.padding(end = 16.dp)
                     )
@@ -118,7 +118,8 @@ fun RBJKhataApp() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    // Add Customer will be connected later
+                    selectedTab = 1
+                    showAddCustomer = true
                 },
                 containerColor = RBJGreen,
                 contentColor = Color.White
@@ -138,9 +139,10 @@ fun RBJKhataApp() {
                 NavigationBarItem(
                     selected = selectedTab == 0,
                     onClick = {
-                        showAddCustomer = true
+                        selectedTab = 0
+                        showAddCustomer = false
                     },                    icon = {
-                        Text("⌂", fontSize = 22.sp)
+                        Text("\u2630", fontSize = 22.sp)
                     },
                     label = {
                         Text("Dashboard")
@@ -151,7 +153,7 @@ fun RBJKhataApp() {
                     selected = selectedTab == 1,
                     onClick = { selectedTab = 1 },
                     icon = {
-                        Text("♙", fontSize = 22.sp)
+                        Text("\u2665", fontSize = 22.sp)
                     },
                     label = {
                         Text("Customers")
@@ -162,7 +164,7 @@ fun RBJKhataApp() {
                     selected = selectedTab == 2,
                     onClick = { selectedTab = 2 },
                     icon = {
-                        Text("🔔", fontSize = 18.sp)
+                        Text("\uD83D\uDD14”", fontSize = 18.sp)
                     },
                     label = {
                         Text("Alerts")
@@ -173,7 +175,7 @@ fun RBJKhataApp() {
                     selected = selectedTab == 3,
                     onClick = { selectedTab = 3 },
                     icon = {
-                        Text("☰", fontSize = 20.sp)
+                        Text("\u2630", fontSize = 20.sp)
                     },
                     label = {
                         Text("More")
@@ -191,6 +193,7 @@ fun RBJKhataApp() {
             1 -> {
                 if (showAddCustomer) {
                     AddCustomerScreen(
+                        modifier = Modifier.padding(innerPadding),
                         onSave = { name, mobile, village ->
                             customerViewModel.addCustomer(
                                 name = name,
@@ -204,9 +207,13 @@ fun RBJKhataApp() {
                         }
                     )
                 } else {
-                    CustomerListScreen()
+                    CustomerListScreen(
+                        viewModel = customerViewModel,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
+
             2 -> {
                 Text(
                     text = "Alerts",
@@ -296,7 +303,7 @@ fun DashboardContent(
                 }
 
                 Text(
-                    text = "▼",
+                    text = "\u25BC",
                     color = RBJGreen,
                     fontSize = 16.sp
                 )
@@ -314,7 +321,7 @@ fun DashboardContent(
             SummaryCard(
                 modifier = Modifier.weight(1f),
                 title = "OVERDUE",
-                value = "₹45,000",
+                value = "\u20B945,000",
                 subtitle = "Interest",
                 backgroundColor = RBJRedLight,
                 valueColor = RBJRed
@@ -323,7 +330,7 @@ fun DashboardContent(
             SummaryCard(
                 modifier = Modifier.weight(1f),
                 title = "DUE TODAY",
-                value = "₹18,000",
+                value = "\u20B918,000",
                 subtitle = "Interest",
                 backgroundColor = RBJGoldLight,
                 valueColor = RBJGold
@@ -375,7 +382,7 @@ fun DashboardContent(
             ) {
 
                 Text(
-                    text = "🔍",
+                    text = "\uD83D\uDD14",
                     fontSize = 18.sp
                 )
 
@@ -394,15 +401,15 @@ fun DashboardContent(
         // Today's Interest
         SectionHeader(
             title = "Today's Interest",
-            action = "View all →"
+            action = "View all \u2192"
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         CustomerDueCard(
             name = "Ram Bihari Jha",
-            location = "Rampur • 98XXXXXXXX",
-            amount = "₹3,000",
+            location = "Rampur \u2022 98XXXXXXXX",
+            amount = "\u20B93,000",
             status = "Interest due today",
             statusColor = RBJGold
         )
@@ -412,15 +419,15 @@ fun DashboardContent(
         // Overdue
         SectionHeader(
             title = "Overdue",
-            action = "View all →"
+            action = "View all \u2192"
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         CustomerDueCard(
             name = "Suresh Kumar",
-            location = "Madhopur • 97XXXXXXXX",
-            amount = "₹6,000",
+            location = "Madhopur \u2022 97XXXXXXXX",
+            amount = "\u20B96,000",
             status = "2 days late",
             statusColor = RBJRed
         )
@@ -429,8 +436,8 @@ fun DashboardContent(
 
         CustomerDueCard(
             name = "Raj Kumar",
-            location = "Patna • 96XXXXXXXX",
-            amount = "₹9,000",
+            location = "Patna \u2022 96XXXXXXXX",
+            amount = "\u20B99,000",
             status = "7 days late",
             statusColor = RBJRed
         )
@@ -442,7 +449,7 @@ fun DashboardContent(
 @Composable
 fun BoxContent() {
     BoxCenter(
-        text = "👴"
+        text = "\uD83D\uDC64"
     )
 }
 
@@ -605,7 +612,7 @@ fun CustomerDueCard(
                 }
 
                 Text(
-                    text = "›",
+                    text = "\u203A",
                     fontSize = 28.sp,
                     color = Color.Gray
                 )
@@ -613,3 +620,5 @@ fun CustomerDueCard(
         }
     }
 }
+
+
