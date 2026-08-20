@@ -42,7 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rbj.khata.ui.theme.RBJKhataTheme
-
+import com.rbj.khata.ui.customers.CustomerListScreen
 private val RBJGreen = Color(0xFF1B5E20)
 private val RBJGreenLight = Color(0xFFE8F5E9)
 private val RBJGold = Color(0xFFC49A3A)
@@ -163,9 +163,27 @@ fun RBJKhataApp() {
         }
     ) { innerPadding ->
 
-        DashboardContent(
-            modifier = Modifier.padding(innerPadding)
-        )
+        when (selectedTab) {
+            0 -> DashboardContent(
+                modifier = Modifier.padding(innerPadding)
+            )
+
+            1 -> CustomerListScreen()
+
+            2 -> {
+                Text(
+                    text = "Alerts",
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+
+            3 -> {
+                Text(
+                    text = "More",
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+        }
     }
 }
 
