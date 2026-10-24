@@ -22,7 +22,7 @@ The repository contains a native Android application built with Kotlin and Jetpa
 
 ## Screenshots
 
-The following mobile captures illustrate the intended app experience. These captures visibly include customer names, phone numbers, village locations, and account figures. Keep them public only if you have permission to share those details; otherwise replace them with redacted or sample-data screenshots.
+Explore the RBJ Khata experience across the dashboard, customer list, workspace menu, active loans, transactions, and due-today view.
 
 <table>
   <tr>
@@ -105,13 +105,13 @@ You can also build a debug APK from a terminal with the Gradle wrapper:
 
 On Windows, use `gradlew.bat assembleDebug`. A locally installed Android SDK is required for the build.
 
-## Privacy and data
+## Data storage
 
-Customer names, phone numbers, village locations, and account figures are visible in the screenshots committed to this public repository. Keep them public only if you have permission to share those details; otherwise replace the captures with redacted or sample data. For demos, use sample records and review every image before publishing. The current repository uses a local Room database; this README does not claim that records are encrypted, backed up, or synchronized across devices.
+Customer records are currently stored locally on the device with Room. Cloud synchronization and account backup are not included in the current code snapshot.
 
 ## Contributing
 
-Suggestions and improvements are welcome. Open an issue to describe a bug or feature idea, or submit a pull request with a focused change. Please avoid committing real customer records, credentials, or private screenshots.
+Suggestions and improvements are welcome. Open an issue to describe a bug or feature idea, or submit a pull request with a focused change. Please do not commit credentials or secrets.
 
 ---
 
