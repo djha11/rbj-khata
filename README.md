@@ -22,7 +22,7 @@ The repository contains a native Android application built with Kotlin and Jetpa
 
 ## Screenshots
 
-The following mobile captures illustrate the intended app experience. The screenshots were provided for this project and may contain example account information.
+The following mobile captures illustrate the intended app experience. These captures visibly include customer names, phone numbers, village locations, and account figures. Keep them public only if you have permission to share those details; otherwise replace them with redacted or sample-data screenshots.
 
 <table>
   <tr>
@@ -107,7 +107,7 @@ On Windows, use `gradlew.bat assembleDebug`. A locally installed Android SDK is 
 
 ## Privacy and data
 
-Customer and account records are personal and financial data. Keep real customer information private, use sample data in demos, and review screenshots before sharing them. The current repository uses a local Room database; this README does not claim that records are encrypted, backed up, or synchronized across devices.
+Customer names, phone numbers, village locations, and account figures are visible in the screenshots committed to this public repository. Keep them public only if you have permission to share those details; otherwise replace the captures with redacted or sample data. For demos, use sample records and review every image before publishing. The current repository uses a local Room database; this README does not claim that records are encrypted, backed up, or synchronized across devices.
 
 ## Contributing
 
